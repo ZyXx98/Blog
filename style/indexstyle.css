@@ -1,0 +1,146 @@
+/* --- Grid Layout --- */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 3rem;
+    max-width: 85vw;
+    margin: 4rem auto;
+}
+
+/* --- Die Capsule --- */
+.post-capsule {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.post-capsule:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Bild-Bereich --- */
+.capsule-image {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.capsule-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.post-capsule:hover .capsule-image img {
+    transform: scale(1.1);
+}
+
+/* Overlay beim Hover */
+.capsule-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.post-capsule:hover .capsule-overlay {
+    opacity: 1;
+}
+
+.read-more {
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 0.5rem 1rem;
+}
+
+/* --- Text-Bereich --- */
+.capsule-content {
+    padding: 1.5rem;
+}
+
+.capsule-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    color: #888; /* Hier könntest du auch eine Theme-Farbe via Variable nutzen */
+}
+
+.capsule-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+}
+
+.capsule-excerpt {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0.7;
+    /* Begrenzt den Text auf 3 Zeilen */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- Generelles --- */
+.index-header .love-letter-prefix {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: var(--theme-primary, #8caed4);
+    display: block;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.index-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin: 2rem;
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Mindestens so hoch wie der Bildschirm */
+    margin: 0;
+    background-color: #0a0a0a; /* Fallback */
+}
+
+/* Styling für den Footer */
+footer {
+    padding: 2rem;
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    opacity: 0.4;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}

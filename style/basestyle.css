@@ -1,0 +1,35 @@
+/* 1. Das Box-Modell korrigieren: Padding vergrößert Elemente nicht mehr über 100% hinaus */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* 2. Horizontales Scrollen global und hart unterbinden */
+html, body {
+    overflow-x: hidden; /* Verhindert das seitliche Scrollen komplett */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Globaler Dark Mode --- */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1.1rem; 
+    line-height: 1.6;
+    margin: 0;
+    
+    /* Smooth Scrolling für eine bessere Nutzererfahrung */
+    scroll-behavior: smooth;
+}
+h2, h3, h4, .top-nav a, .game-logo-text, .date {
+    /* Zuweisung der Überschriften-Schriftart */
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+}
+
+a {
+    color: #90caf9; /* Ein helles Blau für Links im Dark Mode */
+    text-decoration: none;
+}

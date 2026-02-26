@@ -1,0 +1,398 @@
+/* =========================================
+   1. GRUNDLAYOUT & KOMPONENTEN
+   ========================================= */
+
+.main-content {
+    padding: 0 1rem;
+}
+
+/* --- Navigation --- */
+.top-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    z-index: 10;
+}
+
+.top-nav a {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    transition: color 0.3s;
+}
+
+.top-nav a:hover {
+    color: var(--theme-secondary, #90caf9);
+}
+
+/* --- Background --- */
+.page-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    /* Blur erzeugt die Unschärfe, Brightness dunkelt ab für gute Lesbarkeit */
+    filter: blur(20px) brightness(0.2);
+    /* Skaliert das Bild leicht hoch, um unschöne helle Ränder an den Bildschirmkanten durch den Blur zu vermeiden */
+    transform: scale(1.1);
+    z-index: -1;
+    pointer-events: none; /* Verhindert Interaktionen */
+}
+
+/* --- Hero Section --- */
+.post-hero {
+    position: relative;
+    height: 75vh;
+    overflow: hidden;
+    color: #fff;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6);
+    z-index: 1;
+    
+    /* Lässt das Bild von 50% der Höhe bis 100% (unten) transparent auslaufen */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+}
+
+.hero-overlay {
+    position: relative;
+    z-index: 2;
+    max-width: 70vw;
+    margin: 0 auto;
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.hero-overlay h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    color: var(--theme-primary, #90caf9);
+}
+
+.game-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4rem; /* Erzeugt den modernen, weiten Look */
+    color: var(--theme-primary);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.game-logo {
+    max-width: 250px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.date { 
+    font-style: italic;
+    color: var(--theme-secondary, #fff);
+}
+
+/* --- Meta-Info Box --- */
+.meta-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-evenly;
+}
+
+.meta-btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 48px;
+    /* Nutzt deine Theme-Farbe für den Hintergrund */
+    background: color-mix(in srgb, var(--theme-primary) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--theme-primary) 30%, transparent);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden; /* Sorgt dafür, dass das Bild nicht übersteht */
+}
+
+.meta-btn-icon img {
+    width: 40px; /* Größe des Icons im Button */
+    height: 40px;
+    object-fit: contain;
+    /* Falls deine PNGs schwarz sind, kannst du sie hiermit weiß färben: */
+    /* filter: brightness(0) invert(1); */
+}
+
+.meta-btn-icon .steam {
+    filter: brightness(0) invert(1);
+}
+
+.meta-btn-icon:hover {
+    background: color-mix(in srgb, var(--theme-primary) 99%, transparent);
+    border-color: var(--theme-secondary);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+/* --- Bilder & Icons Allgemein --- */
+.post-image img {
+    width: 100%; height: auto; display: block;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.meta-icon {
+    width: 50px; height: 50px; border-radius: 12px;
+    display: block; margin-bottom: 1rem;
+}
+
+/* --- Screenshot Galerie Container --- */
+.screenshot-gallery {
+    max-width: 85vw;
+    margin: 1rem auto;
+    padding-bottom: 1rem;
+}
+
+.screenshot-grid {
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: dense;
+}
+
+.screenshot-grid img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Scroll-Animationen */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.animate-on-scroll.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   2. DESKTOP ANSICHT (Ab 900px)
+   ========================================= */
+@media (min-width: 900px) {
+    /* Main Grid */
+    .loveletter-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 2rem;
+        align-items: start;
+        margin: 4rem auto;
+        max-width: 85vw;
+    }
+
+    /* Textboxen */
+    .intro, .body-text, .conclusion {
+        /* Nutzt die Theme-Tönung aus dem HTML oder das Standard-Grau */
+        background-color: color-mix(in srgb, var(--theme-bg-tint) 50%, transparent);
+        padding: 2.5rem;
+        border-radius: 12px;
+        z-index: 2;
+        /* Nutzt die Sekundärfarbe für einen sehr dezenten Rahmen */
+        border: 1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
+    }
+
+    /* Zeile 1 */
+    .game-meta {
+        grid-column: 1 / 4; /* Breiter: Nimmt 4 Spalten ein statt bisher 3 */
+        background: color-mix(in srgb, var(--theme-bg-tint) 50%, transparent);
+        padding: 1.5rem;
+        border: 1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
+        border-radius: 8px;
+    }
+
+    .game-meta h3 {
+        color: var(--theme-secondary, #fff);
+        margin-top: 0;
+    }
+
+    .intro {
+        grid-column: 4 / 13;
+        grid-row: 1;
+    }
+
+    /* Zeile 2 */
+    .body-text {
+        grid-column: 2 / 9;
+        grid-row: 2;
+    }
+
+    .image-right {
+        grid-column: 8 / 13;
+        grid-row: 2;
+        margin-top: 3rem;
+        transform: rotate(2deg);
+    }
+
+    /* Zeile 3 */
+    .image-left {
+        grid-column: 1 / 6;
+        grid-row: 3;
+        margin-top: 3rem;
+        transform: rotate(-2deg);
+        z-index: 1;
+    }
+
+    .conclusion {
+        grid-column: 5 / 12;
+        grid-row: 3;
+    }
+
+    /* Galerie Grid Desktop */
+    .screenshot-grid {
+        grid-template-columns: repeat(5, 1fr); 
+    }
+    
+    .screenshot-grid .span-2 { grid-column: span 2; aspect-ratio: 16 / 9;}
+    .screenshot-grid .span-3 { grid-column: span 3; aspect-ratio: 21 / 9;}
+    .screenshot-grid .span-4 { grid-column: span 4; aspect-ratio: 21 / 9;}
+    .screenshot-grid .span-5 { grid-column: span 5; aspect-ratio: 32 / 9;}
+}
+
+
+/* =========================================
+   3. MOBILE ANSICHT (Unter 900px)
+   ========================================= */
+@media (max-width: 899px) {
+    .loveletter-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 1rem auto;
+    }
+    
+    .post-hero { 
+        height: auto;
+        min-height: 40vh;
+    }
+
+    .hero-overlay {
+        padding: 1rem;
+    }
+
+    .game-logo {
+        max-width: 180px;
+    }
+    
+    .lead, .body-text, .conclusion, .post-image {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .image-right, .image-left {
+        transform: none; 
+        margin: 0;
+        width: 100%;
+    }
+
+    /* Galerie Grid Mobile */
+    .screenshot-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .screenshot-grid .span-2, .screenshot-grid .span-3 {
+        grid-column: span 1;
+    }
+}
+
+
+/* =========================================
+   4. INTERAKTIONEN (Hover & Lightbox)
+   ========================================= */
+
+/* Gebündelter Hover-Effekt für alle Bilder */
+.post-image img,
+.screenshot-grid img {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    cursor: zoom-in;
+    position: relative;
+}
+
+.post-image img:hover,
+.screenshot-grid img:hover {
+    transform: scale(1.05) rotate(0deg); 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+    z-index: 5; 
+}
+
+/* Lightbox Styles */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: zoom-out;
+}
+
+.lightbox.show {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.7);
+    animation: zoomInLight 0.3s ease-out;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.lightbox-close:hover {
+    color: var(--theme-secondary, #90caf9);
+}
+
+@keyframes zoomInLight {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
