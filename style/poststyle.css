@@ -104,8 +104,8 @@
 }
 
 .game-logo {
-    max-width: 250px;
-    height: auto;
+    max-height: 25vh;
+    width: fit-content;
     margin-bottom: 1rem;
 }
 
@@ -162,6 +162,12 @@
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
+.post-image figcaption {
+    text-align: center;
+    font-style: italic;
+    margin-top: 0.5rem;
+    text-shadow: 2px 2px 2px color-mix(in srgb, var(--theme-primary) 75%, transparent);
+}
 
 .meta-icon {
     width: 50px; height: 50px; border-radius: 12px;
@@ -170,9 +176,20 @@
 
 /* --- Screenshot Galerie Container --- */
 .screenshot-gallery {
-    max-width: 85vw;
+    max-width: 95vw;
     margin: 1rem auto;
     padding-bottom: 1rem;
+}
+
+.screenshot-gallery h2{
+    font-family: "Fraunces", serif;
+    text-align: center;
+    font-weight: 700;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    color: var(--theme-secondary, #90caf9);
+    margin-bottom: 1rem;
 }
 
 .screenshot-grid {
@@ -200,6 +217,10 @@
     transform: translateY(0);
 }
 
+.lead {
+    font-size: 1.5rem;
+    color: var(--theme-primary, #fff);
+}
 
 /* =========================================
    2. DESKTOP ANSICHT (Ab 900px)
@@ -212,7 +233,7 @@
         gap: 2rem;
         align-items: start;
         margin: 4rem auto;
-        max-width: 85vw;
+        max-width: 95vw;
     }
 
     /* Textboxen */
