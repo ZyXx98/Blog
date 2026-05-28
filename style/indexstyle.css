@@ -144,3 +144,180 @@ footer {
     opacity: 0.4;
     border-top: 1px solid rgba(255,255,255,0.05);
 }
+
+/* --- Status Badge (Pill-Design) --- */
+.status-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10; /* Hält den Badge auch über dem dunklen Overlay sichtbar */
+    padding: 0.25rem 0.8rem;
+    border-radius: 50px;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+    color: #ffffff;
+    background-color: #333; /* Fallback */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    pointer-events: none; /* Verhindert Störungen des Hover-Effekts */
+}
+
+/* Modifikatoren für verschiedene Status */
+.badge-update {
+    background-color: #d35400; /* Kräftiges Orange */
+}
+
+.badge-new {
+    background-color: #2980b9; /* Sattes Blau */
+}
+
+
+/* --- Category Filter (Option 2: Animated Underline) --- */
+.category-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 0 auto 3rem auto;
+    max-width: 85vw;
+}
+
+.filter-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.filter-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
+    position: relative;
+    padding-bottom: 0.2rem;
+}
+
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--theme-primary, #8caed4);
+    transition: width 0.3s ease;
+}
+
+.filter-btn:hover::after, .filter-btn.active::after {
+    width: 100%;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    color: #fff;
+}
+
+/* --- Expanding Search Bar --- */
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.search-input {
+    width: 0;
+    opacity: 0;
+    border: none;
+    border-bottom: 1px solid var(--theme-primary, #8caed4);
+    background: transparent;
+    color: #fff;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 0;
+    transition: width 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+    outline: none;
+}
+
+/* Diese Klasse wird per JS getoggelt */
+.search-input.expanded {
+    width: 200px;
+    opacity: 1;
+    padding: 0.3rem 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.search-btn:hover {
+    color: var(--theme-primary, #8caed4);
+}
+
+/* Utility Klasse für den JS-Filter */
+.post-capsule.hidden {
+    display: none;
+}
+
+
+/* ========================================= */
+/* --- MOBILE RESPONSIVENESS (Smartphones) --- */
+/* ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. Header etwas kompakter machen */
+    .index-header h1 {
+        margin: 1rem 0;
+    }
+    
+    .index-header .love-letter-prefix {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+
+    /* 2. Grid auf eine Spalte zwingen und etwas mehr Platz nutzen */
+    .post-grid {
+        grid-template-columns: 1fr; /* Nur noch eine Karte pro Reihe */
+        max-width: 90vw; /* Nutzt mehr Bildschirmbreite auf dem Handy */
+        gap: 2rem;
+        margin: 2rem auto;
+    }
+
+    /* 3. Filter-Menü umbauen (Unter-einander statt neben-einander) */
+    .category-filter {
+        flex-direction: column; /* Stapelt Links und Suche untereinander */
+        gap: 1.5rem;
+        max-width: 90vw;
+        border-bottom: none; /* Sieht auf Mobile ohne Linie oft cleaner aus */
+    }
+
+    .filter-links {
+        flex-wrap: wrap; /* Erlaubt den Buttons den Zeilenumbruch */
+        justify-content: center;
+        gap: 1rem 1.5rem;
+    }
+
+    .filter-btn {
+        font-size: 1rem;
+    }
+
+    /* 4. Suchfeld zentrieren und responsiv machen */
+    .search-wrapper {
+        margin-left: 0; /* Hebt das "rechts andocken" auf */
+        justify-content: center;
+        width: 100%;
+    }
+
+    .search-input.expanded {
+        width: 100%; /* Nimmt den verfügbaren Platz ein */
+        max-width: 250px; /* Wird aber nicht gigantisch groß */
+    }
+}

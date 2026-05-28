@@ -19,6 +19,27 @@
             <p class="love-letter-prefix">Spoiler-free reviews and recommendations for hidden (and sometimes not-so-hidden) gems.</p>
         </header>
 
+        <nav class="category-filter">
+            <div class="filter-links">
+                <a href="#" class="filter-btn active" data-filter="all">All</a>
+                <a href="#" class="filter-btn" data-filter="rpg">RPG</a>
+                <a href="#" class="filter-btn" data-filter="simulation">Simulation</a>
+                <a href="#" class="filter-btn" data-filter="action">Action</a>
+                <a href="#" class="filter-btn" data-filter="adventure">Adventure</a>
+            </div>
+
+            <!-- Die erweiterte Suchfunktion -->
+            <div class="search-wrapper">
+                <input type="text" class="search-input" placeholder="Search letters...">
+                <button class="search-btn" aria-label="Toggle Search">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
         <div class="post-grid">
             <a href="blogposts/cairn.html" class="post-capsule">
                 <div class="capsule-image">
@@ -39,6 +60,9 @@
             <a href="blogposts/witcher3.html" class="post-capsule">
                 <div class="capsule-image">
                     <img src="img/witcher3hero.jpg" alt="Witcher 3 Preview">
+
+                    <span class="status-badge badge-update">UPDATE</span>
+
                     <div class="capsule-overlay">
                         <span class="read-more">Read Letter</span>
                     </div>
@@ -127,5 +151,79 @@
         <p>&copy; 2026 Video Game Letters</p>
     </footer>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- DOM Elemente greifen ---
+        const searchBtn = document.querySelector('.search-btn');
+        const searchInput = document.querySelector('.search-input');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const posts = document.querySelectorAll('.post-capsule');
+
+        // --- 1. Suchfeld ausklappen (Animation) ---
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            searchInput.classList.toggle('expanded');
+            
+            // Wenn ausgeklappt, setze den Cursor rein. 
+            // Wenn eingeklappt, leere die Suche und zeige wieder alles an.
+            if (searchInput.classList.contains('expanded')) {
+                searchInput.focus();
+            } else {
+                searchInput.value = '';
+                filterPosts(); 
+            }
+        });
+
+        // --- 2. Das Herzstück: Die kombinierte Filter-Logik ---
+        function filterPosts() {
+            // Welche Kategorie ist gerade aktiv?
+            const activeBtn = document.querySelector('.filter-btn.active');
+            const activeCategory = activeBtn ? activeBtn.getAttribute('data-filter').toLowerCase() : 'all';
+
+            // Was steht gerade im Suchfeld? (Alles in Kleinbuchstaben für den Vergleich)
+            const searchQuery = searchInput.value.toLowerCase().trim();
+
+            posts.forEach(post => {
+                // Den Text aus dem jeweiligen Post auslesen
+                const tags = post.querySelector('.capsule-tag') ? post.querySelector('.capsule-tag').textContent.toLowerCase() : '';
+                const title = post.querySelector('.capsule-title') ? post.querySelector('.capsule-title').textContent.toLowerCase() : '';
+                const excerpt = post.querySelector('.capsule-excerpt') ? post.querySelector('.capsule-excerpt').textContent.toLowerCase() : '';
+
+                // Check 1: Passt die Kategorie?
+                const matchesCategory = (activeCategory === 'all' || tags.includes(activeCategory));
+                
+                // Check 2: Passt der Suchbegriff? (Wir durchsuchen Titel, Tags UND den kurzen Text)
+                const matchesSearch = (searchQuery === '' || title.includes(searchQuery) || tags.includes(searchQuery) || excerpt.includes(searchQuery));
+
+                // Der Post wird NUR angezeigt, wenn Kategorie UND Suche übereinstimmen
+                if (matchesCategory && matchesSearch) {
+                    post.classList.remove('hidden');
+                } else {
+                    post.classList.add('hidden');
+                }
+            });
+        }
+
+        // --- 3. Event Listener für die Kategorie-Buttons ---
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Active-Klasse verschieben
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter-Funktion aufrufen
+                filterPosts();
+            });
+        });
+
+        // --- 4. Event Listener für das Suchfeld (LIVE-Suche beim Tippen) ---
+        searchInput.addEventListener('input', () => {
+            filterPosts();
+        });
+    });
+</script>
 </body>
 </html>
