@@ -294,7 +294,7 @@
     }
 
     /* Textboxen */
-    .intro, .body-text, .conclusion, .FourOFourText{
+    .intro, .body-text, .conclusion, .FourOFourText, .update-text {
         /* Nutzt die Theme-Tönung aus dem HTML oder das Standard-Grau */
         background-color: color-mix(in srgb, var(--theme-bg-tint) 50%, transparent);
         padding: 2.5rem;
@@ -355,6 +355,18 @@
         grid-row: 3;
     }
 
+      .update-text {
+        grid-column: 2 / 9;
+        grid-row: 4;
+    }
+
+    .update-image-right {
+        grid-column: 8 / 13;
+        grid-row: 4;
+        margin-top: 3rem;
+        transform: rotate(2deg);
+    }
+
     /* Galerie Grid Desktop */
     .screenshot-grid {
         grid-template-columns: repeat(5, 1fr); 
@@ -396,7 +408,7 @@
         max-width: 180px;
     }
     
-    .lead, .body-text, .conclusion, .post-image {
+    .lead, .body-text, .conclusion, .post-image, .update-text {
         padding: 1rem;
         border-radius: 8px;
     }
