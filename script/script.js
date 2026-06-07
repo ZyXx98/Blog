@@ -41,14 +41,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // ==========================================
-    // 3. Ghosting-Crosshair & Interaktive Partikel
+    // 3. Interaktive Partikel
     // ==========================================
-    
-    // Haupt-Mauszeiger (Bracket) im DOM erstellen
-    const customCursor = document.createElement('div');
-    customCursor.className = 'custom-bracket-cursor';
-    customCursor.innerHTML = '<span>[</span><span>]</span>';
-    document.body.appendChild(customCursor);
 
    // Variablen für die Mausposition und Geschwindigkeitsberechnung
     let mouseX = -100;
