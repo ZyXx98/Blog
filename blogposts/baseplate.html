@@ -103,49 +103,6 @@
         <img class="lightbox-content" id="lightbox-img">
     </div>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // 1. Scroll-Animation (Macht den Text wieder sichtbar)
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Einblenden beim Reinsrollen
-                    entry.target.classList.add('show');
-                } else {
-                    // Ausblenden beim Rausrollen (Neu)
-                    entry.target.classList.remove('show');
-                }
-                });
-            }, { threshold: 0.1 });
-
-            const hiddenElements = document.querySelectorAll('.animate-on-scroll');
-            hiddenElements.forEach((el) => observer.observe(el));
-
-            // 2. Lightbox-Funktion (Für die Bilder)
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.querySelector('.lightbox-close');
-
-        // Alle Bilder im loveletter-grid suchen (nicht die Galerie unten)
-        const images = document.querySelectorAll('.post-image img, .screenshot-grid img');
-
-        images.forEach(image => {
-            image.addEventListener('click', (e) => {
-                // Die Quelle (src) des angeklickten Bildes auf das Lightbox-Bild übertragen
-                lightboxImg.src = e.target.src;
-                // Lightbox anzeigen
-                lightbox.classList.add('show');
-            });
-        });
-
-        // Schließen beim Klick auf das X oder auf den dunklen Hintergrund
-        lightbox.addEventListener('click', (e) => {
-            // Verhindern, dass die Lightbox schließt, wenn man nur auf das Bild selbst klickt
-            if (e.target !== lightboxImg) {
-                lightbox.classList.remove('show');
-            }
-        });
-    });
-</script>
+<script src="../script/script.js"></script>
 </body>
 </html>

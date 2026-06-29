@@ -56,7 +56,7 @@
 
 .FourOFour-hero {
     position: relative;
-    height: 65vh;
+    height: 100vh;
     overflow: hidden;
     color: #fff;
 }
@@ -89,8 +89,8 @@
     z-index: 1;
     
     /* Lässt das Bild von 50% der Höhe bis 100% (unten) transparent auslaufen */
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 90%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 90%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%);
 }
 
 .hero-overlay {
@@ -119,22 +119,20 @@
     position: relative;
     z-index: 2;
     max-width: 100vw;
-    margin: 10vh 0 0 auto;
     padding: 2rem;
     height: 100%;
     
     /* Flexbox-Einstellungen */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Schiebt den Inhalt nach unten */
+    justify-content: center; /* Schiebt den Inhalt nach unten */
     align-items: center;       /* NEU: Zentriert die Elemente horizontal */
     text-align: center;        /* NEU: Zentriert den Text selbst (wichtig bei mehrzeiligem Text) */
 }
 
 .FourOFour-overlay h1 {
-    margin: 0 0 -5vh 0;
-    font-size: 4rem;
-    color: var(--theme-primary, #90caf9);
+    margin: 0 0 5vh 0;
+    font-size: 8rem;
     
     /* Die Flex-Eigenschaften wurden hier entfernt, 
        da text-align: center im Parent (Overlay) nun die Arbeit übernimmt. */
@@ -153,6 +151,7 @@
 
 .game-logo {
     max-height: 25vh;
+    max-width: 25vw;
     width: fit-content;
     margin-bottom: 1rem;
 }
@@ -294,23 +293,15 @@
     }
 
     /* Textboxen */
-    .intro, .body-text, .conclusion, .FourOFourText, .update-text {
-        /* Nutzt die Theme-Tönung aus dem HTML oder das Standard-Grau */
-        background-color: color-mix(in srgb, var(--theme-bg-tint) 50%, transparent);
+    .intro, .body-text, .conclusion, .FourOFourText, .update-text, .body-text-summergamefest {
         padding: 2.5rem;
-        border-radius: 12px;
         z-index: 2;
-        /* Nutzt die Sekundärfarbe für einen sehr dezenten Rahmen */
-        border: 1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
     }
 
     /* Zeile 1 */
     .game-meta {
         grid-column: 1 / 4; /* Breiter: Nimmt 4 Spalten ein statt bisher 3 */
-        background: color-mix(in srgb, var(--theme-bg-tint) 50%, transparent);
         padding: 1.5rem;
-        border: 1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
-        border-radius: 8px;
     }
 
     .game-meta h3 {
@@ -331,6 +322,11 @@
     /* Zeile 2 */
     .body-text {
         grid-column: 2 / 9;
+        grid-row: 2;
+    }
+
+    .body-text-summergamefest {
+        grid-column: 1 / 13;
         grid-row: 2;
     }
 
@@ -408,7 +404,7 @@
         max-width: 180px;
     }
     
-    .lead, .body-text, .conclusion, .post-image, .update-text {
+    .lead, .body-text, .conclusion, .post-image, .update-text, .body-text-summergamefest {
         padding: 1rem;
         border-radius: 8px;
     }
@@ -550,7 +546,7 @@
     font-size: 8rem; /* Sehr groß */
     line-height: 1;
     margin: 0;
-    color: var(--theme-primary);
+    color: var(--theme-secondary);
     text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
 }
 
@@ -558,5 +554,354 @@
     font-family: 'Fraunces', serif; /* Passt gut für Zitate */
     font-style: italic;
     font-size: 3rem;
-    color: var(--theme-primary, #90caf9); /* Hellere Farbe für Lesbarkeit */
+    color: var(--theme-secondary, #90caf9); /* Hellere Farbe für Lesbarkeit */
+}
+
+
+/* --- Horizontal Timeline (Option 2 Modified) --- */
+.sgf-horizontal-timeline {
+    display: flex;
+    flex-wrap: wrap; /* Sorgt für den automatischen Zeilenumbruch */
+    gap: 3rem 0; /* 3rem Abstand nach unten zwischen den Zeilen, 0 seitlich (wird durch Padding geregelt) */
+    margin-top: 3rem;
+}
+
+.timeline-step {
+    /* flex-grow, flex-shrink, flex-basis */
+    /* Elemente werden mind. 250px breit. Wenn mehr Platz da ist, füllen sie ihn aus. */
+    flex: 1 1 250px; 
+    position: relative;
+    padding-top: 2rem; /* Platz nach oben für Linie und Punkt */
+    padding-right: 2rem; /* Platz zum nächsten Element auf der rechten Seite */
+}
+
+/* Die horizontale Verbindungslinie */
+.timeline-step::before {
+    content: '';
+    position: absolute;
+    top: 7px; /* Richtet die Linie mittig zum Punkt aus */
+    left: 16px; /* Startet genau rechts neben dem Punkt */
+    width: calc(100% - 16px); /* Zieht die Linie bis zum rechten Rand */
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+/* Der leuchtende Punkt */
+.timeline-dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #121212;
+    border: 2px solid var(--theme-primary, #8caed4);
+    box-shadow: 0 0 10px rgba(140, 174, 212, 0.5);
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Kleiner Hover-Effekt für den Punkt */
+.timeline-step:hover .timeline-dot {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(140, 174, 212, 0.8);
+}
+
+/* Die Texte */
+.timeline-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-date {
+    font-family: 'Barlow Condensed', sans-serif;
+    color: #888;
+    letter-spacing: 0.1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+}
+
+.timeline-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    margin: 0;
+    color: #fff;
+    line-height: 1.2;
+}
+
+/* Mobile Optimierung: Keine Linie am rechten Rand, wenn es eh nur eine Spalte gibt */
+/* --- Mobile Anpassung: Vertikale Timeline --- */
+@media (max-width: 768px) {
+    .sgf-horizontal-timeline {
+        flex-direction: column;
+    }
+    
+    .timeline-step {
+        flex: 0 0 auto;
+        padding-top: 0;
+        padding-left: 2.5rem; /* Schiebt den Text nach rechts, macht Platz für die Linie */
+        padding-right: 0;
+        width: 100%;
+    }
+
+    .timeline-dot {
+        top: 5px; /* Richtet den Punkt auf Höhe des Datums aus */
+        left: 0;
+    }
+
+    /* Der vertikale Verbindungsstrich */
+    .timeline-step::before {
+        display: block; 
+        width: 2px;
+        height: calc(100% + 2rem); /* Überbrückt den Abstand zum nächsten Punkt */
+        top: 16px; /* Startet direkt unter dem Punkt */
+        left: 7px; /* Zentriert genau unter dem 16px großen Punkt */
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Verhindert, dass der Strich beim allerletzten Event ins Nichts führt */
+    .timeline-step:last-child::before {
+        display: none;
+    }
+}
+
+/* --- Live-Feed (Game Highlights) --- */
+.game-highlights {
+    grid-column: 1 / -1; /* Verhindert das Einquetschen in schmale Spalten */
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Großzügiger Abstand zwischen den einzelnen Spielen */
+    background-color: color-mix(in srgb, var(--theme-bg-tint) 50%, transparent);
+        padding: 2.5rem;
+        border-radius: 12px;
+        z-index: 2;
+        /* Nutzt die Sekundärfarbe für einen sehr dezenten Rahmen */
+        border: 1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
+}
+.highlights-title {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--theme-primary, #90caf9);
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Definiert die Variable für den rotierenden Winkel */
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* --- Deine modifizierte Feed-Card --- */
+.feed-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    background-color: color-mix(in srgb, var(--theme-bg-tint) 50%, transparent);
+    /* Dein originaler Rahmen im Normalzustand */
+    border: 1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 1;
+    /* Übergang für transform, background UND die Rahmenfarbe */
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+/* --- Der rotierende Rahmen (im Normalzustand unsichtbar) --- */
+.feed-card::before {
+    content: '';
+    position: absolute;
+    inset: 0; 
+    border-radius: 12px; /* Exakt an deine 12px angepasst */
+    padding: 2px; /* Die Dicke des Leuchtstreifens */
+    
+    /* Der optimierte, absolut weiche 3-Farben-Verlauf ohne Kanten */
+    background: conic-gradient(
+        from var(--angle),
+        transparent 0%,
+        transparent 20%,
+        var(--theme-bg-tint) 40%,
+        var(--card-border-2, var(--theme-secondary)) 65%,
+        var(--card-border-1, var(--theme-primary)) 90%, 
+        transparent 100% 
+    );
+    
+    /* Die CSS-Maske stanzt das Innere aus, damit der Kartenhintergrund transparent bleibt */
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    z-index: 1; 
+    pointer-events: none;
+    
+    /* Startet die unendliche, langsame Rotation im Hintergrund */
+    animation: rotateBorder 10s linear infinite;
+    
+    /* Standardmäßig unsichtbar */
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* --- Der Hover-Zustand --- */
+.feed-card:hover {
+    background-color: color-mix(in srgb, var(--theme-bg-tint) 70%, transparent);
+    /* Macht den statischen Rahmen unsichtbar, damit der glühende Rahmen übernimmt */
+    border-color: transparent; 
+}
+
+/* Aktiviert den rotierenden Rahmen beim Hovern */
+.feed-card:hover::before {
+    opacity: 1;
+}
+
+/* --- Die Rotations-Animation --- */
+@keyframes rotateBorder {
+    to {
+        --angle: 360deg;
+    }
+}
+.feed-content {
+    padding: 2rem;
+}
+.feed-header {
+    margin-bottom: 0.5rem;
+}
+
+.feed-event {
+    font-family: 'Barlow Condensed', sans-serif;
+    color: var(--theme-primary, #8caed4);
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.feed-game-title {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem; /* Schön groß und prominent */
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.1;
+}
+
+.feed-media {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.feed-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.feed-text p {
+    color: #ddd;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+}
+
+.feed-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Mobile Anpassung für den Feed --- */
+@media (max-width: 768px) {
+    .feed-card {
+        grid-template-columns: 1fr;
+    }
+    .feed-content {
+        order: 1; /* Dein Text steht ganz oben */
+        padding: 1.5rem;
+    }
+    .feed-media {
+        order: 2; /* Das Bild kommt darunter */
+    }
+    .feed-image {
+        border-radius: 0 0 12px 12px; /* Nur die unteren Ecken sind abgerundet */
+    }
+}
+
+
+/* --- Das Partikelsystem (Symbole) --- */
+.tech-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: -1;
+    font-family: monospace;
+    font-weight: bold;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    /* HIER GEÄNDERT: 3.5 Sekunden statt 1.2 Sekunden */
+    transition: transform 3.5s ease-out, opacity 3.5s ease-out; 
+}
+
+
+/* Definiert eine Variable für den rotierenden Winkel */
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* --- Textbox mit wanderndem Rahmen --- */
+.animated-border-box {
+    position: relative;
+    /* Dein gewünschter, halbtransparenter Hintergrund */
+    background: color-mix(in srgb, var(--theme-bg-tint) 50%, transparent);
+    border-radius: 10px;
+    padding: 2rem;
+    z-index: 1;
+}
+
+/* Der Rahmen (wird exakt über die Box gelegt) */
+.animated-border-box::before {
+    content: '';
+    position: absolute;
+    inset: 0; 
+    border-radius: 10px; 
+    padding: 2px; 
+    
+    /* Der überarbeitete, komplett weiche Farbverlauf */
+    background: conic-gradient(
+        from var(--angle),
+        transparent 0%,
+        transparent 20%,
+        var(--theme-bg-tint) 40%,
+        var(--theme-secondary) 60%,
+        var(--theme-primary) 80%, /* Hier leuchtet der "Kopf" am stärksten */
+        transparent 100% /* Fades sanft aus, um harte Kanten bei 0% zu verhindern */
+    );
+    
+    /* Die CSS-Maske */
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    z-index: -1; 
+    pointer-events: none;
+    
+    /* HIER GEÄNDERT: Zeit von 6s auf 10s erhöht für entspannteres Wandern */
+    animation: rotateBorder 10s linear infinite;
+}
+
+/* Die Rotations-Animation animiert jetzt nur noch die Variable */
+@keyframes rotateBorder {
+    to {
+        --angle: 360deg;
+    }
 }

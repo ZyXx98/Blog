@@ -8,7 +8,15 @@
 }
 
 /* --- Die Capsule --- */
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
 .post-capsule {
+    position: relative; /* Wichtig für den leuchtenden Rand */
+    z-index: 1;
     text-decoration: none;
     color: inherit;
     display: flex;
@@ -16,14 +24,57 @@
     background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Dein alter, dezenter Rand */
+    
+    /* Transition für das Schweben, den Schatten UND die Rahmenfarbe */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
+/* --- Der rotierende Hover-Rahmen (Im Hintergrund) --- */
+.post-capsule::before {
+    content: '';
+    position: absolute;
+    inset: 0; 
+    border-radius: 12px; 
+    padding: 2px; /* Die Dicke des leuchtenden Randes */
+    
+    background: conic-gradient(
+        from var(--angle),
+        transparent 0%,
+        transparent 20%,
+        rgba(255, 255, 255, 0.03) 40%,
+        var(--card-border-1, rgba(255, 255, 255, 0.03)) 65%,
+        var(--card-border-2, rgba(255, 255, 255, 0.03)) 90%, 
+        transparent 100% 
+    );
+    
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    z-index: 1; 
+    pointer-events: none;
+    
+    animation: rotateBorder 10s linear infinite;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* --- Der magische Hover-Moment (Schweben + Leuchten) --- */
 .post-capsule:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-10px); /* Karte schwebt nach oben */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Tiefer Schatten */
+    border-color: transparent; /* Der alte Rand verschwindet... */
+}
+
+.post-capsule:hover::before {
+    opacity: 1; /* ... und der animierte Rand taucht auf! */
+}
+
+@keyframes rotateBorder {
+    to {
+        --angle: 360deg;
+    }
 }
 
 /* --- Bild-Bereich --- */

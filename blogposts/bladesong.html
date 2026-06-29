@@ -43,7 +43,7 @@
         
         <div class="loveletter-grid">
             
-    <aside class="game-meta brief-seal animate-on-scroll">
+    <aside class="game-meta brief-seal animate-on-scroll animated-border-box">
         <img src="../img/bladesongicon.ico" alt="Icon" class="meta-icon">
         <h3>Game Dossier</h3>
         <ul>
@@ -61,12 +61,12 @@
         </div>
     </aside>
 
-    <section class="intro animate-on-scroll">
+    <section class="intro animate-on-scroll animated-border-box">
         <p class="lead">Exploring the heights of Kami Mountain...</p>
         <p>The atmosphere is dense, the combat is precise, and the exploration rewards curiosity. Here is why it deserves your time:</p>
     </section>
 
-    <section class="body-text animate-on-scroll">
+    <section class="body-text animate-on-scroll animated-border-box">
         <p>One of the most profound aspects of Hollow Knight is its environmental storytelling. Every corner of Hallownest tells a tale, often without a single word. The architecture of the Crossroads, the decay of the Fungal Wastes, the silent regality of the City of Tears—they all paint a picture of a fallen kingdom, once vibrant, now consumed by an infected dream.</p>
         <p>As you descend, you uncover the lore through fragmented dialogues, subtle item descriptions, and the very design of the bosses you encounter.</p>
     </section>
@@ -80,7 +80,7 @@
         <img src="../img/cairnscreen02.jpeg" alt="Hollow Knight Gameplay">
     </figure>
 
-    <section class="conclusion animate-on-scroll">
+    <section class="conclusion animate-on-scroll animated-border-box">
         <p>In conclusion, Hollow Knight is a masterpiece that respects the player’s intelligence and time. It demands patience and rewards it tenfold with unforgettable moments, challenging gameplay, and an emotional depth rarely found in the genre.</p>
     </section>
 
@@ -103,49 +103,6 @@
         <img class="lightbox-content" id="lightbox-img">
     </div>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // 1. Scroll-Animation (Macht den Text wieder sichtbar)
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Einblenden beim Reinsrollen
-                    entry.target.classList.add('show');
-                } else {
-                    // Ausblenden beim Rausrollen (Neu)
-                    entry.target.classList.remove('show');
-                }
-                });
-            }, { threshold: 0.1 });
-
-            const hiddenElements = document.querySelectorAll('.animate-on-scroll');
-            hiddenElements.forEach((el) => observer.observe(el));
-
-            // 2. Lightbox-Funktion (Für die Bilder)
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.querySelector('.lightbox-close');
-
-        // Alle Bilder im loveletter-grid suchen (nicht die Galerie unten)
-        const images = document.querySelectorAll('.post-image img, .screenshot-grid img');
-
-        images.forEach(image => {
-            image.addEventListener('click', (e) => {
-                // Die Quelle (src) des angeklickten Bildes auf das Lightbox-Bild übertragen
-                lightboxImg.src = e.target.src;
-                // Lightbox anzeigen
-                lightbox.classList.add('show');
-            });
-        });
-
-        // Schließen beim Klick auf das X oder auf den dunklen Hintergrund
-        lightbox.addEventListener('click', (e) => {
-            // Verhindern, dass die Lightbox schließt, wenn man nur auf das Bild selbst klickt
-            if (e.target !== lightboxImg) {
-                lightbox.classList.remove('show');
-            }
-        });
-    });
-</script>
+    <script src="../script/script.js"></script>
 </body>
 </html>
