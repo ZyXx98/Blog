@@ -157,13 +157,13 @@
 
 /* --- Generelles --- */
 .index-header .love-letter-prefix {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.5rem;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1.0rem;
     text-transform: uppercase;
     letter-spacing: 0.2rem;
     color: var(--theme-primary, #8caed4);
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
@@ -258,7 +258,7 @@ footer {
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: var(--theme-primary, #8caed4);
+    background-color: var(--theme-secondary, #8caed4);
     transition: width 0.3s ease;
 }
 
@@ -267,7 +267,7 @@ footer {
 }
 
 .filter-btn:hover, .filter-btn.active {
-    color: #fff;
+    color: var(--theme-primary, #8caed4);
 }
 
 /* --- Expanding Search Bar --- */
@@ -281,7 +281,7 @@ footer {
     width: 0;
     opacity: 0;
     border: none;
-    border-bottom: 1px solid var(--theme-primary, #8caed4);
+    border-bottom: 1px solid var(--theme-secondary, #8caed4);
     background: transparent;
     color: #fff;
     font-family: 'Work Sans', sans-serif;
@@ -310,7 +310,7 @@ footer {
 }
 
 .search-btn:hover {
-    color: var(--theme-primary, #8caed4);
+    color: var(--theme-secondary, #8caed4);
 }
 
 /* Utility Klasse für den JS-Filter */

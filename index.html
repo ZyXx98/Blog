@@ -11,12 +11,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Fraunces:opsz,wght@9..144,400;9..144,900&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/basestyle.css">
     <link rel="stylesheet" href="style/indexstyle.css">
+    <style>
+        :root {
+            /* Ein eisiges, leuchtendes Weiß-Blau */
+            --theme-primary: #7dd3fc; 
+            
+            /* Ein tiefes, elektrisches Violett für subtile Tiefe */
+            --theme-secondary: #6d28d9; 
+            
+            /* Ein sattes, sehr dunkles Schiefergrau */
+            --theme-bg-tint: #0f172a;
+        }
+    </style>
 </head>
 <body class="dark-mode">
     <main class="main-content">
         <header class="index-header">
-            <h1>Video Game Letters</h1>
-            <p class="love-letter-prefix">Spoiler-free reviews and recommendations for hidden (and sometimes not-so-hidden) gems.</p>
+            <div class="header-bg" style="background-image: url('img/indexhero.jpg');"></div>
+            <div class="header-overlay"></div>
+    
+            <div class="header-content">
+                <h1>Video Game Letters</h1>
+                <p class="love-letter-prefix">Spoiler-free reviews and recommendations for hidden (and sometimes not-so-hidden) gems.</p>
+            </div>
         </header>
 
         <nav class="category-filter">

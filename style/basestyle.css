@@ -33,3 +33,14 @@ a {
     color: #90caf9; /* Ein helles Blau für Links im Dark Mode */
     text-decoration: none;
 }
+
+/*  ==========================================
+                    Scrollbar
+    ========================================== */
+
+html {
+    /* scrollbar-color: [Farbe des Scroll-Griffs] [Farbe des Hintergrunds] */
+    scrollbar-color: var(--theme-secondary, #8caed4) rgba(0, 0, 0, 0);
+    scrollbar-width: thin; /* Macht die Scrollbar standardmäßig schmaler */
+    scroll-behavior: smooth;
+}
